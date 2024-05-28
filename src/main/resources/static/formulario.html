@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulários</title>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            display: flex;
+            height: 100%;
+        }
+
+        #formulario1 {
+            flex: 1;
+            padding: 20px;
+        }
+        #formulario1 h2 {
+            margin-bottom: 20px; /* Espaçamento inferior para o título */
+            text-align: center;
+            font-weight: bold;
+            color: #de1616;
+            font-size: 30px;
+        }
+
+        #formulario2 {
+            flex: 1;
+            padding: 20px;
+        }
+
+        form {
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        select,
+        textarea {
+            width: calc(100% - 12px);
+            padding: 6px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            box-sizing: border-box;
+        }
+
+        input[type="checkbox"] {
+            margin-right: 5px;
+            vertical-align: middle; /* Adicionado para alinhar verticalmente */
+        }
+
+        input[type="submit"] {
+            background-color: #333333;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #de1616;
+        }
+
+        /* Adicionado para alinhar os checkboxes lado a lado */
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+        }
+
+        /* Adicionado margem entre os checkboxes */
+        .checkbox-group input[type="checkbox"],
+        .checkbox-group label {
+            margin-right: 10px;
+            vertical-align: middle; /* Adicionado para alinhar verticalmente */
+        }
+        #btnEnviar {
+            background-color: rgb(51, 51, 51);
+            color: #ffffff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            align-self: flex-end;
+            margin-top: 30px;
+            font-weight: bold;
+
+        }
+
+        #btnEnviar:hover {
+            background-color: #e70707;
+        }
+        /* Adicionando media queries para tornar o formulário responsivo */
+        @media screen and (max-width: 768px) {
+            .container {
+                flex-direction: column; /* Alterado para empilhar os elementos em telas menores */
+            }
+            #formulario1, #formulario2 {
+                flex: none; /* Alterado para evitar que os formulários ocupem a largura total */
+                width: 100%; /* Alterado para ocupar toda a largura */
+                margin-bottom: 20px; /* Adicionado espaçamento entre os formulários */
+            }
+        }
+    </style>
+    <style>
+        /* CSS para o cabeçalho */
+        header {
+            background-color: #333333FF; /* Cor de fundo do cabeçalho */
+            padding: 20px;
+            text-align: center;
+            color: #FFFFFF; /* Cor do texto */
+        }
+
+        .logo-container img {
+            display: block;
+            margin: 0 auto; /* Centralizar a imagem */
+        }
+
+        .header-text h1 {
+            margin-top: 20px; /* Espaçamento entre a logo e o texto */
+            font-size: 1.5em;
+        }
+        /* CSS para o botão */
+        .voltar-button {
+            background-color: #333333; /* Cor de fundo do botão */
+            color: #ffffff; /* Cor do texto */
+            padding: 10px 20px;
+            border: none;
+            border-radius: 3px;
+            text-decoration: none; /* Remover sublinhado padrão dos links */
+        }
+
+        .voltar-button:hover {
+            background-color: #f30a0a; /* Cor de fundo do botão ao passar o mouse */
+        }
+        /* CSS para a seção de vacantes */
+        #vacantes {
+            text-align: center; /* Centraliza o conteúdo */
+            margin-top: 90px; /* Espaçamento superior */
+        }
+
+        #vacantes h2 {
+            color: #ffffff;
+            background-color: #333333;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+
+        .vacantes-list {
+            list-style-type: none;
+            padding: 0;
+            margin-top: 10px;
+            max-height: 400px; /* Definindo a altura máxima da lista */
+            overflow-y: auto; /* Permitindo rolagem vertical */
+        }
+
+        .vacante-item {
+            background-color: #f9f9f9;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .vacante-item h3 {
+            margin-top: 0;
+        }
+
+        .vacante-item p {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <!-- Cabeçalho com a logo e texto -->
+    <div class="logo-container">
+        <img src="null.png" alt="Logo" width="250">
+    </div>
+    <div class="header-text">
+        <h1>Únete a nuestro equipo Electrogrupo S.A.C.I</h1>
+    </div>
+    <div class="button-container">
+        <a href="https://electrogrupo.com.py/index.html" class="voltar-button">Volver al Sitio</a>
+    </div>
+</header>
+
+<div class="container">
+    <div id="formulario1">
+        <form id="formularioForm1">
+            <h2>SOLICITUD DE EMPLEO</h2>
+            <label for="nomeCompleto">NOMBRE COMPLETO:</label>
+            <input type="text" id="nomeCompleto" name="nomeCompleto" required><br>
+
+            <label for="idade">EDAD:</label>
+            <input type="number" id="idade" name="idade" required><br>
+
+            <label for="sexo">SEXO:</label>
+            <select id="sexo" name="sexo" required>
+                <option value="masculino">Masculino</option>
+                <option value="femenino">Femenino</option>
+                <option value="outro">Otro</option>
+            </select><br>
+
+            <label for="estadoCivil">ESTADO CIVIL:</label>
+            <select id="estadoCivil" name="estadoCivil" required>
+                <option value="soltero">Soltero/a</option>
+                <option value="casado">Casado/a</option>
+                <option value="divorciado">Divorciado/a</option>
+                <option value="viudo">Viudo/a</option>
+            </select><br>
+
+            <label for="numeroDocumento">Nº DOCUMENTO:</label>
+            <input type="text" id="numeroDocumento" name="numeroDocumento" required><br>
+
+            <label for="endereco">DIRECCIÓN:</label>
+            <input type="text" id="endereco" name="endereco" required><br>
+
+            <label for="telefone">CELULAR Nº:</label>
+            <input type="text" id="telefone" name="telefone" required><br>
+            <label for="descricao">VACANTE DE INTERÉS:</label>
+            <input type="text" id="descricao" name="descricao" required><br>
+        </form>
+    </div>
+    <div id="formulario2">
+        <form id="formularioForm2">
+            <label for="cursos">3 CURSOS Y/O ESTUDIOS REALIZADOS MÁS RECIENTES:</label><br>
+            <textarea id="cursos" name="cursos" rows="4" required></textarea><br>
+
+            <label for="experiencia">ÚLTIMA EXPERIENCIA LABORAL</label><br>
+            <label for="empresa">Empresa:</label>
+            <input type="text" id="empresa" name="empresa" required><br>
+
+            <label for="puesto">Puesto:</label>
+            <input type="text" id="puesto" name="puesto" required><br>
+
+            <label for="tiempoPermanencia">Tiempo de Permanencia:</label>
+            <input type="text" id="tiempoPermanencia" name="tiempoPermanencia" required><br>
+
+            <label for="referencia">Referencia:</label>
+            <input type="text" id="referencia" name="referencia" required><br>
+            <label for="disponibilidad">DISPONIBILIDAD PARA SU ADMISION A LA EMPRESA:</label><br>
+            <div class="checkbox-group">
+                <input type="checkbox" id="inmediata" name="inmediata" value="inmediata" required>
+                <label for="inmediata">Inmediata</label>
+
+                <input type="checkbox" id="aConfirmar" name="aConfirmar" value="aConfirmar" required>
+                <label for="aConfirmar">A confirmar</label>
+            </div>
+            <input type="text" id="diasConfirmar" name="diasConfirmar" placeholder="Número de días" style="display: none;"><br>
+            <label for="salario">SALARIO INICIAL PRETENDIDO:</label><br>
+            <div class="checkbox-group">
+                <input type="checkbox" id="salarioMinimo" name="salarioMinimo" value="salarioMinimo" required>
+                <label for="salarioMinimo">Salario mínimo</label>
+
+                <input type="checkbox" id="otro" name="otro" value="otro" required>
+                <label for="otro">Otro (especificar)</label>
+            </div>
+            <input type="text" id="valorPretendido" name="valorPretendido" placeholder="Valor pretendido" style="display: none;" required><br>
+        </form>
+        <button id="btnEnviar">Enviar Datos</button>
+    </div>
+</div>
+<section id="vacantes">
+    <h2>Vacantes Disponibles</h2>
+    <ul id="listaVacantes" class="vacantes-list"></ul>
+</section>
+<script>
+    document.getElementById('aConfirmar').addEventListener('change', function() {
+        var diasConfirmar = document.getElementById('diasConfirmar');
+        diasConfirmar.style.display = this.checked ? 'inline-block' : 'none';
+        diasConfirmar.required = this.checked;
+    });
+
+    document.getElementById('otro').addEventListener('change', function() {
+        var valorPretendido = document.getElementById('valorPretendido');
+        valorPretendido.style.display = this.checked ? 'inline-block' : 'none';
+        valorPretendido.required = this.checked;
+    });
+</script>
+<script>
+    document.getElementById('aConfirmar').addEventListener('change', function() {
+        var diasConfirmar = document.getElementById('diasConfirmar');
+        diasConfirmar.style.display = this.checked ? 'inline-block' : 'none';
+        diasConfirmar.required = this.checked;
+    });
+
+    document.getElementById('otro').addEventListener('change', function() {
+        var valorPretendido = document.getElementById('valorPretendido');
+        valorPretendido.style.display = this.checked ? 'inline-block' : 'none';
+        valorPretendido.required = this.checked;
+    });
+
+    // Adicionado evento de clique ao botão enviar
+    document.getElementById('btnEnviar').addEventListener('click', function(event) {
+        // Impede o comportamento padrão de envio do formulário
+        event.preventDefault();
+        // Verifica se todos os campos estão preenchidos antes de enviar
+        if (document.getElementById('formularioForm1').checkValidity() && document.getElementById('formularioForm2').checkValidity()) {
+            // Reunir os dados do formulário
+            var dadosFormulario = {
+                nomeCompleto: document.getElementById('nomeCompleto').value,
+                idade: document.getElementById('idade').value,
+                sexo: document.getElementById('sexo').value,
+                estadoCivil: document.getElementById('estadoCivil').value,
+                numeroDocumento: document.getElementById('numeroDocumento').value,
+                endereco: document.getElementById('endereco').value,
+                telefone: document.getElementById('telefone').value,
+                cursos: document.getElementById('cursos').value,
+                empresa: document.getElementById('empresa').value,
+                puesto: document.getElementById('puesto').value,
+                tiempoPermanencia: document.getElementById('tiempoPermanencia').value,
+                referencia: document.getElementById('referencia').value,
+                disponibilidad: document.getElementById('inmediata').checked ? 'Inmediata' : (document.getElementById('aConfirmar').checked ? 'A confirmar' : ''),
+                diasConfirmar: document.getElementById('diasConfirmar').value,
+                salarioPretendido: document.getElementById('salarioMinimo').checked ? 'Salario mínimo' : (document.getElementById('otro').checked ? document.getElementById('valorPretendido').value : '')
+            };
+
+            // Se Inmediata está marcado, desmarque o checkbox "A confirmar" e remova a obrigação do campo "diasConfirmar"
+            if (document.getElementById('inmediata').checked) {
+                document.getElementById('aConfirmar').checked = false;
+                document.getElementById('diasConfirmar').required = false;
+            }
+
+            // Se Salario mínimo está marcado, desmarque o checkbox "Otro" e remova a obrigação do campo "valorPretendido"
+            if (document.getElementById('salarioMinimo').checked) {
+                document.getElementById('otro').checked = false;
+                document.getElementById('valorPretendido').required = false;
+            }
+
+            // Enviar os dados para o backend
+            fetch('/formulario/salvar', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(dadosFormulario)
+            })
+                .then(response => {
+                    if (response.ok) {
+                        alert('Formulário enviado com sucesso!');
+                    } else {
+                        alert('Erro ao enviar o formulário. Por favor, tente novamente.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Erro ao enviar o formulário:', error);
+                    alert('Erro ao enviar o formulário. Por favor, tente novamente.');
+                });
+        } else {
+            // Se os campos não estiverem preenchidos, exibe uma mensagem de erro
+            alert('Por favor, preencha todos os campos obrigatórios antes de enviar o formulário.');
+        }
+    });
+</script>
+<script>
+    fetch('/api/vacantes')
+        .then(response => response.json())
+        .then(data => {
+            const listaVacantes = document.getElementById('listaVacantes');
+            data.forEach(vacante => {
+                const itemLista = document.createElement('li');
+                itemLista.innerHTML = `
+                <div class="vacante-item">
+                    <h3>${vacante.titulo}</h3>
+                    <p>${vacante.descricao}</p>
+                    <p>${vacante.setor.nome}</p>
+                    <p>${vacante.preenchida ? 'Preenchida' : 'Disponible'}</p>
+                </div>
+            `;
+                listaVacantes.appendChild(itemLista);
+            });
+        })
+        .catch(error => {
+            console.error('Erro ao obter as vagas disponíveis:', error);
+            const listaVacantes = document.getElementById('listaVacantes');
+            listaVacantes.innerHTML = '<li>Erro ao carregar as vagas disponíveis. Por favor, tente novamente mais tarde.</li>';
+        });
+</script>
+</body>
+</html>

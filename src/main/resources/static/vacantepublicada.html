@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cabeçalho</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        header {
+            background-color: #333333FF;
+            padding: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            margin-right: auto;
+        }
+
+        .title-description {
+            text-align: center;
+            color: #FFFFFF;
+            flex-grow: 1;
+        }
+
+        .title-description h1 {
+            margin: 0;
+            font-size: 30px;
+        }
+
+        .title-description p {
+            margin-top: 15px;
+            font-size: 16px;
+        }
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 5px 20px;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 15px;
+        }
+        #sidebar {
+            position: fixed;
+            left: 0;
+            top: 100px; /* Ajuste para posicionar abaixo do cabeçalho */
+            bottom: 0;
+            width: 220px;
+            background-color: #333;
+            color: #fff;
+            padding-top: 60px;
+        }
+        #sidebar ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        #sidebar ul li {
+            padding: 15px;
+            cursor: pointer;
+            font-size: 18px; /* Tamanho da fonte dos botões */
+            transition: background-color 0.3s; /* Transição de cor ao passar o mouse */
+            margin-bottom: 10px; /* Margem entre os botões */
+            margin-left: 5px;
+        }
+        #sidebar ul li:hover {
+            background-color: #555; /* Cor de fundo ao passar o mouse */
+        }
+        #sidebar ul li.submenu {
+            font-size: 14px; /* Tamanho da fonte dos itens do submenu */
+            padding: 5px 5px; /* Ajuste de padding para itens do submenu */
+            text-align: center;
+        }
+        #sidebar img {
+            width: 180px;
+            height: auto;
+            display: block;
+            margin-top: 20px;
+            margin-bottom: 50px;
+            margin-left: 10px;
+        }
+        #content {
+            margin-left: 220px; /* Ajuste para o espaço do sidebar */
+            padding: 20px;
+        }
+        .logout-button {
+            position: absolute;
+            bottom: 20px; /* Distância do final do menu */
+            left: 0;
+            width: 80%;
+            padding: 10px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .logout-button:hover {
+            background-color: rgb(231, 7, 7);
+        }
+
+        .logout-button i {
+            margin-right: 10px;
+        }
+    </style>
+    <style>
+        /* Estilo para a lista de vagas */
+        #vagas-list {
+            max-height: 500px; /* Altura máxima para a lista */
+            overflow-y: auto; /* Habilitar rolagem vertical se necessário */
+            margin-left: 30px;
+        }
+
+        .vaga {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px; /* Aumentado o espaçamento entre as vagas */
+        }
+
+        .vaga h3 {
+            margin-top: 0; /* Removendo a margem superior do título */
+        }
+
+        .vaga p {
+            margin-bottom: 0; /* Removendo a margem inferior do texto da vaga */
+        }
+
+        /* Estilo para os botões dentro da lista de vagas */
+        .vaga button {
+            margin-top: 5px; /* Adicionando espaçamento acima dos botões */
+            cursor: pointer;
+            padding: 5px 10px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            transition: background-color 0.3s;
+        }
+
+        .vaga button:hover {
+            background-color: #e70707;
+        }
+
+        /* Estilo para a caixa de busca */
+        #search-box {
+            margin-bottom: 20px; /* Adicionando espaçamento abaixo da caixa de busca */
+            display: flex;
+            justify-content: center; /* Centralizando horizontalmente */
+            align-items: center; /* Centralizando verticalmente */
+        }
+
+        #search-box input[type="text"] {
+            padding: 5px;
+            width: 200px;
+        }
+
+        #search-box button {
+            padding: 5px 10px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        #search-box button:hover {
+            background-color: #f30a0a;
+        }
+    </style>
+    <style>
+        /* Seu CSS existente */
+
+        /* Estilo para o modal de edição */
+        .modal {
+            display: none; /* Ocultar modal por padrão */
+            position: fixed; /* Posição fixa para sobrepor a página */
+            z-index: 1000; /* Z-index alto para sobrepor outros elementos */
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto; /* Habilitar rolagem quando o conteúdo do modal for maior que a tela */
+            background-color: rgba(0,0,0,0.4); /* Fundo semi-transparente */
+        }
+
+        .modal-content {
+            background-color: #fefefe; /* Cor de fundo do modal */
+            margin: 15% auto; /* Centralizar verticalmente e definir margens laterais */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%; /* Largura do modal */
+        }
+
+        .modal-header, .modal-footer {
+            padding: 10px 20px; /* Espaçamento interno do cabeçalho e rodapé */
+            background-color: #333; /* Cor de fundo do cabeçalho e rodapé */
+            color: #fff; /* Cor do texto */
+        }
+
+        .modal-body {
+            padding: 20px; /* Espaçamento interno do corpo do modal */
+        }
+
+        .close {
+            color: #aaa; /* Cor do botão de fechar */
+            float: right; /* Alinhar o botão de fechar à direita */
+            font-size: 28px; /* Tamanho da fonte do botão de fechar */
+            font-weight: bold; /* Negrito do botão de fechar */
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #f30a0a; /* Alterar cor do botão de fechar ao passar o mouse ou focar */
+            text-decoration: none; /* Remover sublinhado */
+            cursor: pointer; /* Alterar cursor ao passar o mouse */
+        }
+    </style>
+</head>
+<body>
+<header>
+    <div class="logo">
+        <img src="null.png" alt="Logo" width="180">
+    </div>
+    <div class="title-description">
+        <h1>VACANTES PUBLICADAS</h1>
+        <p>Consulta todas las vacantes publicadas</p>
+    </div>
+</header>
+<div id="sidebar">
+    <div style="text-align: center;">
+    </div>
+    <ul>
+        <li onclick="toggleSubMenu('usuarios')">Usuário</li>
+        <ul id="usuarios" style="display: none;">
+            <li class="submenu" onclick="carregarPagina('cadastrarusuario.html')">Registrar usuarios</li>
+        </ul>
+        <li onclick="toggleSubMenu('formulario')">Formulário</li>
+        <ul id="formulario" style="display: none;">
+            <li class="submenu" onclick="carregarPagina('versolicitudes.html')">Ver solicitudes</li>
+        </ul>
+        <li onclick="toggleSubMenu('gestion_vacantes')">Gestión de vacantes</li>
+        <ul id="gestion_vacantes" style="display: none;">
+            <li class="submenu" onclick="carregarPagina('publicarvacante.html')">Publicar vacante</li>
+            <li class="submenu" onclick="carregarPagina('vacantepublicada.html')">Vacante publicada</li>
+            <li class="submenu" onclick="carregarPagina('vacanteocupada.html')">Vacante ocupada</li>
+        </ul>
+        <li onclick="toggleSubMenu('funcionarios')">Funcionários</li>
+        <li class="logout-button" onclick="logout()">
+            <i class="fas fa-sign-out-alt"></i> Logout
+        </li>
+        <ul id="funcionarios" style="display: none;">
+            <li class="submenu" onclick="carregarPagina('registrarfuncionario.html')">Registrar funcionário</li>
+            <li class="submenu" onclick="carregarPagina('funcionariosregistrados.html')">Funcionários registrados</li>
+        </ul>
+    </ul>
+</div>
+<div id="content">
+    <!-- Caixa de busca por nome da vaga -->
+    <div id="search-box">
+        <input type="text" id="search-input" placeholder="Buscar vaga por nome...">
+        <button onclick="buscarVagas()">Buscar</button>
+    </div>
+
+    <!-- Lista de vagas -->
+    <div id="vagas-list">
+        <!-- Lista de vagas será carregada aqui -->
+    </div>
+</div>
+<div id="editModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <span class="close" onclick="fecharModal()">&times;</span>
+            <h2>Editar Vaga</h2>
+        </div>
+        <div class="modal-body">
+            <form id="editForm">
+                <label for="titulo">Título:</label>
+                <input type="text" id="titulo" name="titulo"><br>
+
+                <label for="descricao">Descrição:</label>
+                <textarea id="descricao" name="descricao"></textarea><br>
+
+                <button type="submit">Salvar</button>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <!-- Você pode adicionar botões adicionais ou informações aqui, se necessário -->
+        </div>
+    </div>
+</div>
+<footer>
+    <p>&copy; 2024 Electrogrupo S.A.C.I</p>
+</footer>
+<script>
+    function logout() {
+        // Realize as operações de logout aqui, como limpar o token de autenticação, etc.
+        // Redirecione para a página de login
+        window.location.href = "login.html";
+    }
+    function toggleSubMenu(id) {
+        var submenu = document.getElementById(id);
+        if (submenu.style.display === "none") {
+            submenu.style.display = "block";
+        } else {
+            submenu.style.display = "none";
+        }
+    }
+
+    function carregarPagina(pagina) {
+        window.location.href = pagina;
+    }
+</script>
+<script>
+    function carregarVagas() {
+        fetch('172.29.3.196:8080/api/vacantes')
+            .then(response => response.json())
+            .then(data => {
+                // Ordenar as vagas pelo ID em ordem decrescente
+                data.sort((a, b) => b.id - a.id);
+
+                const vagasList = document.getElementById('vagas-list');
+                vagasList.innerHTML = ''; // Limpar lista atual
+
+                data.forEach(vaga => {
+                    const vagaItem = document.createElement('div');
+                    vagaItem.classList.add('vaga');
+                    vagaItem.id = `vaga-${vaga.id}`; // Adicionar ID único para cada vaga
+                    vagaItem.innerHTML = `
+                    <h3>${vaga.titulo}</h3>
+                    <p>${vaga.descricao}</p>
+                    <button onclick="marcarComoPreenchida(${vaga.id})">Marcar como Preenchida</button>
+                    <button onclick="editarVaga(${vaga.id})">Editar</button>
+                    <button onclick="excluirVaga(${vaga.id})">Excluir</button>
+                `;
+                    vagasList.appendChild(vagaItem);
+                });
+            })
+            .catch(error => console.error('Erro ao carregar vagas:', error));
+    }
+
+
+    function marcarComoPreenchida(id) {
+        if (confirm('Tem certeza de que deseja marcar esta vaga como preenchida?')) {
+            fetch(`/api/vacantes/${id}/marcarPreenchida`, {
+                method: 'PUT'
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Erro ao marcar vaga como preenchida.');
+                    }
+                    // Remover a vaga da lista na UI
+                    const vagaRemovida = document.querySelector(`#vaga-${id}`);
+                    if (vagaRemovida) {
+                        vagaRemovida.remove();
+                    }
+                    alert('Vaga marcada como preenchida com sucesso!');
+                })
+                .catch(error => console.error('Erro ao marcar vaga como preenchida:', error));
+        }
+    }
+
+    // Função para buscar vagas
+    // Função para buscar vagas por nome
+    function buscarVagas() {
+        const termoBusca = document.getElementById('search-input').value;
+        fetch(`/api/vacantes/nome/${encodeURIComponent(termoBusca)}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Não foi possível encontrar as vagas.');
+                }
+                return response.json();
+            })
+            .then(data => {
+                const vagasList = document.getElementById('vagas-list');
+                vagasList.innerHTML = ''; // Limpar lista atual
+                if (data.length === 0) {
+                    vagasList.innerHTML = '<p>Nenhuma vaga encontrada com o nome especificado.</p>';
+                } else {
+                    data.forEach(vaga => {
+                        const vagaItem = document.createElement('div');
+                        vagaItem.classList.add('vaga');
+                        vagaItem.innerHTML = `
+                        <h3>${vaga.titulo}</h3>
+                        <p>${vaga.descricao}</p>
+                        <button onclick="editarVaga(${vaga.id})">Editar</button>
+                        <button onclick="excluirVaga(${vaga.id})">Excluir</button>
+                    `;
+                        vagasList.appendChild(vagaItem);
+                    });
+                }
+            })
+            .catch(error => console.error('Erro ao buscar vagas:', error));
+    }
+
+    // Função para excluir vaga
+    function excluirVaga(id) {
+        if (confirm('Tem certeza de que deseja excluir esta vaga?')) {
+            fetch(`/api/vacantes/${id}`, {
+                method: 'DELETE'
+            })
+                .then(() => {
+                    alert('Vaga excluída com sucesso!');
+                    // Recarregar a lista de vagas após exclusão
+                    carregarVagas();
+                })
+                .catch(error => console.error('Erro ao excluir vaga:', error));
+        }
+    }
+
+    // Carregar as vagas ao carregar a página
+    document.addEventListener('DOMContentLoaded', () => {
+        carregarVagas();
+    });
+
+    // Função para buscar vagas ao pressionar Enter no campo de busca
+    document.getElementById('search-input').addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') {
+            buscarVagas();
+        }
+    });
+</script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    // Função para abrir o modal de edição
+    function abrirModal() {
+        document.getElementById('editModal').style.display = 'block';
+    }
+
+    // Função para fechar o modal de edição
+    function fecharModal() {
+        document.getElementById('editModal').style.display = 'none';
+    }
+
+    // Função para editar vaga
+    function editarVaga(id) {
+        // Obter os detalhes da vaga a ser editada
+        $.get(`/api/vacantes/${id}`, function(data) {
+            // Preencher o formulário de edição com os detalhes da vaga
+            $('#titulo').val(data.titulo);
+            $('#descricao').val(data.descricao);
+
+            // Definir o ID da vaga como um atributo de dados no formulário
+            $('#editForm').attr('data-vaga-id', id);
+
+            // Abrir o modal de edição
+            abrirModal();
+        });
+    }
+
+    $(document).ready(function() {
+        // Enviar os dados atualizados quando o formulário for enviado
+        $('#editForm').submit(function(event) {
+            event.preventDefault();
+
+            // Obter o ID da vaga a partir do atributo de dados no formulário
+            const vagaId = $(this).attr('data-vaga-id');
+
+            // Serializar os dados do formulário
+            const formData = $(this).serialize();
+
+            // Enviar solicitação PUT para atualizar a vaga
+            $.ajax({
+                type: 'PUT',
+                url: `/api/vacantes/atualizarvaga/${vagaId}`,
+                data: formData,
+                success: function(response) {
+                    alert('Vaga atualizada com sucesso!');
+                    // Fechar o modal após atualização bem-sucedida
+                    fecharModal();
+                    // Redirecionar ou atualizar a página conforme necessário
+                    window.location.reload(); // Recarregar a página para atualizar a lista de vagas
+                },
+                error: function(xhr, status, error) {
+                    alert('Erro ao atualizar a vaga.');
+                    console.error(xhr.responseText);
+                }
+            });
+        });
+    });
+</script>
+</body>
+</html>

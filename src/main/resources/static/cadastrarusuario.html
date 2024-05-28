@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cabeçalho</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    header {
+      background-color: #333333FF;
+      padding: 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      margin-right: auto;
+    }
+
+    .title-description {
+      text-align: center;
+      color: #FFFFFF;
+      flex-grow: 1;
+    }
+
+    .title-description h1 {
+      margin: 0;
+      font-size: 30px;
+    }
+
+    .title-description p {
+      margin-top: 15px;
+      font-size: 16px;
+    }
+    footer {
+      background-color: #333;
+      color: #fff;
+      padding: 5px 20px;
+      text-align: center;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+    }
+
+    footer p {
+      margin: 0;
+      font-size: 15px;
+    }
+    #sidebar {
+      position: fixed;
+      left: 0;
+      top: 100px; /* Ajuste para posicionar abaixo do cabeçalho */
+      bottom: 0;
+      width: 220px;
+      background-color: #333;
+      color: #fff;
+      padding-top: 60px;
+    }
+    #sidebar ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    #sidebar ul li {
+      padding: 15px;
+      cursor: pointer;
+      font-size: 18px; /* Tamanho da fonte dos botões */
+      transition: background-color 0.3s; /* Transição de cor ao passar o mouse */
+      margin-bottom: 10px; /* Margem entre os botões */
+      margin-left: 5px;
+    }
+    #sidebar ul li:hover {
+      background-color: #555; /* Cor de fundo ao passar o mouse */
+    }
+    #sidebar ul li.submenu {
+      font-size: 14px; /* Tamanho da fonte dos itens do submenu */
+      padding: 5px 5px; /* Ajuste de padding para itens do submenu */
+      text-align: center;
+    }
+    #sidebar img {
+      width: 180px;
+      height: auto;
+      display: block;
+      margin-top: 20px;
+      margin-bottom: 50px;
+      margin-left: 10px;
+    }
+    #content {
+      margin-left: 220px; /* Ajuste para o espaço do sidebar */
+      padding: 20px;
+    }
+    .logout-button {
+      position: absolute;
+      bottom: 20px; /* Distância do final do menu */
+      left: 0;
+      width: 80%;
+      padding: 10px;
+      text-align: center;
+      cursor: pointer;
+    }
+
+    .logout-button:hover {
+      background-color: rgb(231, 7, 7);
+    }
+
+    .logout-button i {
+      margin-right: 10px;
+    }
+
+    .container {
+      margin-top: 50px; /* Ajuste para posicionar abaixo do cabeçalho */
+      margin-left: 0px; /* Ajuste para ficar ao lado do menu */
+      padding: 0px;
+      background-color: #ffffff;
+      border: 1px solid #ffffff;
+      border-radius: 5px;
+      text-align: center;
+    }
+
+
+    #registroForm label {
+      display: block;
+      margin-top: 10px;
+    }
+
+    #registroForm input[type="text"],
+    #registroForm input[type="password"],
+    #registroForm input[type="submit"] {
+      width: 50%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    #registroForm input[type="submit"] {
+      background-color: #333;
+      color: #fff;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    #registroForm input[type="submit"]:hover {
+      background-color: #e70707;
+    }
+
+  </style>
+</head>
+<body>
+<header>
+  <div class="logo">
+    <img src="null.png" alt="Logo" width="180">
+  </div>
+  <div class="title-description">
+    <h1>Registrar usuarios</h1>
+    <p>Registre los usuarios que puedan acceder al sistema de RRHH.</p>
+  </div>
+</header>
+<div id="sidebar">
+  <div style="text-align: center;">
+  </div>
+  <ul>
+    <li onclick="toggleSubMenu('usuarios')">Usuário</li>
+    <ul id="usuarios" style="display: none;">
+      <li class="submenu" onclick="carregarPagina('cadastrarusuario.html')">Registrar usuarios</li>
+    </ul>
+    <li onclick="toggleSubMenu('formulario')">Formulário</li>
+    <ul id="formulario" style="display: none;">
+      <li class="submenu" onclick="carregarPagina('versolicitudes.html')">Ver solicitudes</li>
+    </ul>
+    <li onclick="toggleSubMenu('gestion_vacantes')">Gestión de vacantes</li>
+    <ul id="gestion_vacantes" style="display: none;">
+      <li class="submenu" onclick="carregarPagina('publicarvacante.html')">Publicar vacante</li>
+      <li class="submenu" onclick="carregarPagina('vacantepublicada.html')">Vacante publicada</li>
+      <li class="submenu" onclick="carregarPagina('vacanteocupada.html')">Vacante ocupada</li>
+    </ul>
+    <li onclick="toggleSubMenu('funcionarios')">Funcionários</li>
+    <li class="logout-button" onclick="logout()">
+      <i class="fas fa-sign-out-alt"></i> Logout
+    </li>
+    <ul id="funcionarios" style="display: none;">
+      <li class="submenu" onclick="carregarPagina('registrarfuncionario.html')">Registrar funcionário</li>
+      <li class="submenu" onclick="carregarPagina('funcionariosregistrados.html')">Funcionários registrados</li>
+    </ul>
+  </ul>
+</div>
+<div class="container">
+  <form id="registroForm">
+    <label for="username">Nome de Usuário:</label>
+    <input type="text" id="username" name="username" required>
+
+    <label for="password">Senha:</label>
+    <input type="password" id="password" name="password" required>
+
+    <input type="submit" value="Cadastrar">
+  </form>
+</div>
+<footer>
+  <p>&copy; 2024 Electrogrupo S.A.C.I</p>
+</footer>
+<script>
+  function logout() {
+    // Realize as operações de logout aqui, como limpar o token de autenticação, etc.
+    // Redirecione para a página de login
+    window.location.href = "login.html";
+  }
+  function toggleSubMenu(id) {
+    var submenu = document.getElementById(id);
+    if (submenu.style.display === "none") {
+      submenu.style.display = "block";
+    } else {
+      submenu.style.display = "none";
+    }
+  }
+
+  function carregarPagina(pagina) {
+    window.location.href = pagina;
+  }
+</script>
+<script>
+  document.getElementById("registroForm").addEventListener("submit", function(event) {
+    event.preventDefault(); // Evita o comportamento padrão de envio do formulário
+
+    var formData = {
+      username: document.getElementById("username").value,
+      password: document.getElementById("password").value
+    };
+
+    fetch("/auth/registro", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(formData)
+    })
+            .then(response => {
+              if (response.ok) {
+                // Se a resposta for bem-sucedida, exibe uma mensagem de sucesso
+                alert("Usuário registrado com sucesso!");
+                // Limpa os campos do formulário
+                document.getElementById("username").value = "";
+                document.getElementById("password").value = "";
+              } else {
+                // Se houver um erro, exiba uma mensagem de erro ao usuário
+                response.json().then(data => {
+                  alert(data.message); // A mensagem de erro deve estar no formato { "message": "Mensagem de erro" }
+                });
+              }
+            })
+            .catch(error => {
+              console.error("Ocorreu um erro durante a solicitação:", error);
+            });
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cabeçalho</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        header {
+            background-color: #333333FF;
+            padding: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            margin-right: auto;
+        }
+
+        .title-description {
+            text-align: center;
+            color: #FFFFFF;
+            flex-grow: 1;
+        }
+
+        .title-description h1 {
+            margin: 0;
+            font-size: 30px;
+        }
+
+        .title-description p {
+            margin-top: 15px;
+            font-size: 16px;
+        }
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 5px 20px;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 15px;
+        }
+        #sidebar {
+            position: fixed;
+            left: 0;
+            top: 100px; /* Ajuste para posicionar abaixo do cabeçalho */
+            bottom: 0;
+            width: 220px;
+            background-color: #333;
+            color: #fff;
+            padding-top: 60px;
+        }
+        #sidebar ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        #sidebar ul li {
+            padding: 15px;
+            cursor: pointer;
+            font-size: 18px; /* Tamanho da fonte dos botões */
+            transition: background-color 0.3s; /* Transição de cor ao passar o mouse */
+            margin-bottom: 10px; /* Margem entre os botões */
+            margin-left: 5px;
+        }
+        #sidebar ul li:hover {
+            background-color: #555; /* Cor de fundo ao passar o mouse */
+        }
+        #sidebar ul li.submenu {
+            font-size: 14px; /* Tamanho da fonte dos itens do submenu */
+            padding: 5px 5px; /* Ajuste de padding para itens do submenu */
+            text-align: center;
+        }
+        #sidebar img {
+            width: 180px;
+            height: auto;
+            display: block;
+            margin-top: 20px;
+            margin-bottom: 50px;
+            margin-left: 10px;
+        }
+        #content {
+            margin-left: 220px; /* Ajuste para o espaço do sidebar */
+            padding: 20px;
+        }
+        .logout-button {
+            position: absolute;
+            bottom: 20px; /* Distância do final do menu */
+            left: 0;
+            width: 80%;
+            padding: 10px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .logout-button:hover {
+            background-color: rgb(231, 7, 7);
+        }
+
+        .logout-button i {
+            margin-right: 10px;
+        }
+
+    </style>
+    <style>
+        /* Adicione estilos conforme necessário */
+        #content {
+            margin-left: 220px;
+            padding: 20px;
+            margin-top: 30px;
+        }
+
+        form {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #333333;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #e70707;
+        }
+
+        #content h2{
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        /* Estilos para a mensagem de criação do setor */
+        #mensagem-setor {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fff;
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+        /* Estilos para a tela de criação de novo setor */
+        #criar-setor-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5); /* fundo semi-transparente */
+            z-index: 1000;
+        }
+
+        #criar-setor-modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fff;
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            z-index: 1001; /* coloca o modal sobre o overlay */
+        }
+
+        /* Estilos para o botão de fechar do modal */
+        #fechar-modal {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+            font-size: 20px;
+            color: #888;
+        }
+
+        #fechar-modal:hover {
+            color: #333;
+        }
+
+    </style>
+</head>
+<body>
+<header>
+    <div class="logo">
+        <img src="null.png" alt="Logo" width="180">
+    </div>
+    <div class="title-description">
+        <h1>PUBLICAR VACANCIAS</h1>
+        <p>Publicar nuevas ofertas de trabajo</p>
+    </div>
+</header>
+<div id="sidebar">
+    <div style="text-align: center;">
+    </div>
+    <ul>
+        <li onclick="toggleSubMenu('usuarios')">Usuário</li>
+        <ul id="usuarios" style="display: none;">
+            <li class="submenu" onclick="carregarPagina('cadastrarusuario.html')">Registrar usuarios</li>
+        </ul>
+        <li onclick="toggleSubMenu('formulario')">Formulário</li>
+        <ul id="formulario" style="display: none;">
+            <li class="submenu" onclick="carregarPagina('versolicitudes.html')">Ver solicitudes</li>
+        </ul>
+        <li onclick="toggleSubMenu('gestion_vacantes')">Gestión de vacantes</li>
+        <ul id="gestion_vacantes" style="display: none;">
+            <li class="submenu" onclick="carregarPagina('publicarvacante.html')">Publicar vacante</li>
+            <li class="submenu" onclick="carregarPagina('vacantepublicada.html')">Vacante publicada</li>
+            <li class="submenu" onclick="carregarPagina('vacanteocupada.html')">Vacante ocupada</li>
+        </ul>
+        <li onclick="toggleSubMenu('funcionarios')">Funcionários</li>
+        <li class="logout-button" onclick="logout()">
+            <i class="fas fa-sign-out-alt"></i> Logout
+        </li>
+        <ul id="funcionarios" style="display: none;">
+            <li class="submenu" onclick="carregarPagina('registrarfuncionario.html')">Registrar funcionário</li>
+            <li class="submenu" onclick="carregarPagina('funcionariosregistrados.html')">Funcionários registrados</li>
+        </ul>
+    </ul>
+</div>
+<div id="content">
+    <h2>Publicar una nueva Vacancia</h2>
+    <form id="form_publicar_vaga" onsubmit="return false;">
+        <label for="titulo">Título:</label><br>
+        <input type="text" id="titulo" name="titulo" required><br>
+        <label for="descricao">Descripcion:</label><br>
+        <textarea id="descricao" name="descricao" required></textarea><br>
+        <label for="setor">Setor:</label><br>
+        <select id="setor" name="setor" required>
+        </select><br>
+        <button onclick="exibirModalCriarSetor()">Nuevo Setor</button>
+        <button onclick="publicarVaga()">Publicar Vacancia</button>
+    </form>
+</div>
+<div id="criar-setor-overlay">
+    <div id="criar-setor-modal">
+        <!-- Conteúdo do modal de criação do setor -->
+        <span id="fechar-modal">&times;</span>
+        <h2>Criar Novo Setor</h2>
+        <label for="nome-setor">Nome do Setor:</label>
+        <input type="text" id="nome-setor">
+        <!-- Botão para criar o novo setor -->
+        <button onclick="criarNovoSetor()">Criar Setor</button>
+    </div>
+</div>
+<!-- Div para exibir a mensagem de criação do setor -->
+<div id="mensagem-setor"></div>
+
+<footer>
+    <p>&copy; 2024 Electrogrupo S.A.C.I</p>
+</footer>
+<script>
+    function logout() {
+        // Realize as operações de logout aqui, como limpar o token de autenticação, etc.
+        // Redirecione para a página de login
+        window.location.href = "login.html";
+    }
+    function toggleSubMenu(id) {
+        var submenu = document.getElementById(id);
+        if (submenu.style.display === "none") {
+            submenu.style.display = "block";
+        } else {
+            submenu.style.display = "none";
+        }
+    }
+
+    function carregarPagina(pagina) {
+        window.location.href = pagina;
+    }
+</script>
+<script>
+    function publicarVaga() {
+        var titulo = document.getElementById('titulo').value;
+        var descricao = document.getElementById('descricao').value;
+        var setor = document.getElementById('setor').value;
+
+        if (!setor) {
+            alert('Por favor, selecione um setor para a vaga.');
+            return;
+        }
+
+        var novaVaga = {
+            titulo: titulo,
+            descricao: descricao,
+            setor: { id: setor } // Enviar o ID do setor ao invés do nome
+        };
+
+        fetch('/api/vacantes', {
+            method: 'POST',
+            body: JSON.stringify(novaVaga),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Erro ao criar nova vaga: ' + response.statusText);
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Nova vaga criada:', data);
+                alert('Nova vaga criada com sucesso!');
+            })
+            .catch(error => {
+                console.error('Erro ao enviar os dados:', error);
+                alert('Erro ao criar nova vaga: ' + error.message);
+            });
+    }
+
+    function criarNovoSetor() {
+        var nomeSetor = document.getElementById('nome-setor').value;
+        if (nomeSetor) {
+            var novoSetor = {
+                nome: nomeSetor,
+                descricao: ""
+            };
+
+            fetch('/api/vacantes/setor', {
+                method: 'POST',
+                body: JSON.stringify(novoSetor),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Erro ao criar novo setor');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    alert('Novo setor criado com sucesso!');
+                    ocultarModalCriarSetor();
+                    carregarSetores();
+                    // Seleciona automaticamente o novo setor criado
+                    document.getElementById('setor').value = data.id;
+                })
+                .catch(error => {
+                    console.error('Erro ao criar novo setor:', error);
+                    alert('Erro ao criar novo setor. Por favor, tente novamente.');
+                });
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        carregarSetores();
+    });
+
+    function carregarSetores() {
+        fetch('/api/vacantes/setores')
+            .then(response => response.json())
+            .then(data => {
+                var selectSetor = document.getElementById('setor');
+                selectSetor.innerHTML = ''; // Limpa as opções existentes
+
+                // Adiciona a opção vazia no início da lista de opções
+                var option = document.createElement('option');
+                option.text = ''; // Texto vazio
+                option.value = ''; // Valor vazio
+                selectSetor.appendChild(option);
+
+                // Adiciona as opções de setor ao campo de seleção
+                data.forEach(setor => {
+                    var option = document.createElement('option');
+                    option.text = setor.nome;
+                    option.value = setor.id;
+                    selectSetor.appendChild(option);
+                });
+            })
+            .catch(error => {
+                console.error('Erro ao carregar os setores:', error);
+            });
+    }
+</script>
+<script>
+    // Função para exibir o modal de criação de novo setor
+    function exibirModalCriarSetor() {
+        var overlay = document.getElementById('criar-setor-overlay');
+        var modal = document.getElementById('criar-setor-modal');
+        overlay.style.display = 'block';
+        modal.style.display = 'block';
+    }
+
+    // Função para ocultar o modal de criação de novo setor
+    // Função para exibir o modal de criação de novo setor
+    function exibirModalCriarSetor() {
+        var overlay = document.getElementById('criar-setor-overlay');
+        var modal = document.getElementById('criar-setor-modal');
+        overlay.style.display = 'block';
+        modal.style.display = 'block';
+
+        // Adiciona o evento de clique para o ícone "X" fechar o modal
+        var fecharModalIcone = document.getElementById('fechar-modal');
+        fecharModalIcone.addEventListener('click', ocultarModalCriarSetor);
+    }
+
+    // Função para ocultar o modal de criação de novo setor
+    function ocultarModalCriarSetor() {
+        var overlay = document.getElementById('criar-setor-overlay');
+        var modal = document.getElementById('criar-setor-modal');
+        overlay.style.display = 'none';
+        modal.style.display = 'none';
+
+        // Remove o evento de clique do ícone "X" para evitar múltiplos eventos
+        var fecharModalIcone = document.getElementById('fechar-modal');
+        fecharModalIcone.removeEventListener('click', ocultarModalCriarSetor);
+    }
+</script>
+</body>
+</html>

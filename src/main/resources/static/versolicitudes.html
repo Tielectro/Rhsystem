@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cabeçalho</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    header {
+      background-color: #333333FF;
+      padding: 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      margin-right: auto;
+    }
+
+    .title-description {
+      text-align: center;
+      color: #FFFFFF;
+      flex-grow: 1;
+    }
+
+    .title-description h1 {
+      margin: 0;
+      font-size: 30px;
+    }
+
+    .title-description p {
+      margin-top: 15px;
+      font-size: 16px;
+    }
+    footer {
+      background-color: #333;
+      color: #fff;
+      padding: 5px 20px;
+      text-align: center;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+    }
+
+    footer p {
+      margin: 0;
+      font-size: 15px;
+    }
+    #sidebar {
+      position: fixed;
+      left: 0;
+      top: 100px; /* Ajuste para posicionar abaixo do cabeçalho */
+      bottom: 0;
+      width: 220px;
+      background-color: #333;
+      color: #fff;
+      padding-top: 60px;
+    }
+    #sidebar ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    #sidebar ul li {
+      padding: 15px;
+      cursor: pointer;
+      font-size: 18px; /* Tamanho da fonte dos botões */
+      transition: background-color 0.3s; /* Transição de cor ao passar o mouse */
+      margin-bottom: 10px; /* Margem entre os botões */
+      margin-left: 5px;
+    }
+    #sidebar ul li:hover {
+      background-color: #555; /* Cor de fundo ao passar o mouse */
+    }
+    #sidebar ul li.submenu {
+      font-size: 14px; /* Tamanho da fonte dos itens do submenu */
+      padding: 5px 5px; /* Ajuste de padding para itens do submenu */
+      text-align: center;
+    }
+    #sidebar img {
+      width: 180px;
+      height: auto;
+      display: block;
+      margin-top: 20px;
+      margin-bottom: 50px;
+      margin-left: 10px;
+    }
+    #content {
+      margin-left: 220px; /* Ajuste para o espaço do sidebar */
+      padding: 20px;
+    }
+    .logout-button {
+      position: absolute;
+      bottom: 20px; /* Distância do final do menu */
+      left: 0;
+      width: 80%;
+      padding: 10px;
+      text-align: center;
+      cursor: pointer;
+    }
+
+    .logout-button:hover {
+      background-color: rgb(231, 7, 7);
+    }
+
+    .logout-button i {
+      margin-right: 10px;
+    }
+
+  </style>
+  <style>
+    /* CSS para a nova seção #content */
+    #content {
+      margin: 50px; /* Centraliza horizontalmente e adiciona margem superior */
+      width: 80%; /* Largura desejada */
+      padding: 30px;
+      background-color: #ffffff; /* Cor de fundo */
+      border-radius: 5px; /* Borda arredondada */
+
+      text-align: center;
+    }
+
+    /* Estilo para o contêiner de formulários */
+    .container {
+      margin-bottom: 20px; /* Espaçamento inferior */
+    }
+
+    /* Estilo para o grupo de botões */
+    .button-group {
+      margin-top: 20px; /* Espaçamento entre os botões e o conteúdo anterior */
+    }
+
+    /* Estilos para os botões, inputs, etc. */
+    .button-group button {
+      padding: 10px 20px;
+      background-color: #333;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .button-group button:hover {
+      background-color: #555;
+    }
+
+    #searchInput {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+  </style>
+
+
+
+</head>
+<body>
+<header>
+  <div class="logo">
+    <img src="null.png" alt="Logo" width="180">
+  </div>
+  <div class="title-description">
+    <h1>SOLICITUDES DE EMPLEO</h1>
+    <p>Consulta todas las solicitudes de empleo</p>
+  </div>
+</header>
+<div id="sidebar">
+  <div style="text-align: center;">
+  </div>
+  <ul>
+    <li onclick="toggleSubMenu('usuarios')">Usuário</li>
+    <ul id="usuarios" style="display: none;">
+      <li class="submenu" onclick="carregarPagina('cadastrarusuario.html')">Registrar usuarios</li>
+    </ul>
+    <li onclick="toggleSubMenu('formulario')">Formulário</li>
+    <ul id="formulario" style="display: none;">
+      <li class="submenu" onclick="carregarPagina('versolicitudes.html')">Ver solicitudes</li>
+    </ul>
+    <li onclick="toggleSubMenu('gestion_vacantes')">Gestión de vacantes</li>
+    <ul id="gestion_vacantes" style="display: none;">
+      <li class="submenu" onclick="carregarPagina('publicarvacante.html')">Publicar vacante</li>
+      <li class="submenu" onclick="carregarPagina('vacantepublicada.html')">Vacante publicada</li>
+      <li class="submenu" onclick="carregarPagina('vacanteocupada.html')">Vacante ocupada</li>
+    </ul>
+    <li onclick="toggleSubMenu('funcionarios')">Funcionários</li>
+    <li class="logout-button" onclick="logout()">
+      <i class="fas fa-sign-out-alt"></i> Logout
+    </li>
+    <ul id="funcionarios" style="display: none;">
+      <li class="submenu" onclick="carregarPagina('registrarfuncionario.html')">Registrar funcionário</li>
+      <li class="submenu" onclick="carregarPagina('funcionariosregistrados.html')">Funcionários registrados</li>
+    </ul>
+  </ul>
+</div>
+<div id="content">
+  <div id="formulariosContainer" class="container">
+    <!-- Os formulários serão exibidos aqui -->
+  </div>
+  <div class="button-group">
+    <button onclick="buscarFormularios()">Buscar Formulários</button>
+    <button onclick="ordenarPorNome()">Ordenar por Nome</button>
+    <input type="text" id="searchInput" placeholder="Buscar por Nome">
+    <button onclick="buscarPorNome()">Buscar</button>
+    <button onclick="buscarUltimoFormulario()">Último Formulário</button>
+  </div>
+</div>
+<footer>
+  <p>&copy; 2024 Electrogrupo S.A.C.I</p>
+</footer>
+<script>
+  function logout() {
+    // Realize as operações de logout aqui, como limpar o token de autenticação, etc.
+    // Redirecione para a página de login
+    window.location.href = "login.html";
+  }
+  function toggleSubMenu(id) {
+    var submenu = document.getElementById(id);
+    if (submenu.style.display === "none") {
+      submenu.style.display = "block";
+    } else {
+      submenu.style.display = "none";
+    }
+  }
+
+  function carregarPagina(pagina) {
+    window.location.href = pagina;
+  }
+
+  // Funções JavaScript para buscar, ordenar e manipular formulários
+</script>
+<script>
+  function buscarFormularios() {
+    fetch('/formulario/todos')
+            .then(response => response.json())
+            .then(data => {
+              const container = document.getElementById('formulariosContainer');
+              container.innerHTML = '';
+
+              // Invertendo a ordem dos formulários recebidos para colocar os mais recentes no início da lista
+              data.reverse();
+
+              data.forEach(formulario => {
+                const panel = document.createElement('div');
+                panel.classList.add('panel');
+                panel.innerHTML = `
+                            <div>
+                                <p><strong>Nome Completo:</strong> ${formulario.nomeCompleto}</p>
+                                <p><strong>Endereço:</strong> ${formulario.endereco}</p>
+                                <p><strong>Telefone:</strong> ${formulario.telefone}</p>
+                                <p><strong>Descrição:</strong> ${formulario.descricao}</p>
+                                <p><strong>Número Documento:</strong> ${formulario.numeroDocumento}</p>
+                                <p><strong>Cursos:</strong> ${formulario.cursos}</p> <!-- Novo campo -->
+                                <p><strong>Empresa:</strong> ${formulario.empresa}</p> <!-- Novo campo -->
+                                <p><strong>Puesto:</strong> ${formulario.puesto}</p> <!-- Novo campo -->
+                                <p><strong>Tiempo de Permanencia:</strong> ${formulario.tiempoPermanencia}</p> <!-- Novo campo -->
+                                <p><strong>Referencia:</strong> ${formulario.referencia}</p> <!-- Novo campo -->
+                                <p><strong>Disponibilidad:</strong> ${formulario.disponibilidad}</p> <!-- Novo campo -->
+                                <p><strong>Días a Confirmar:</strong> ${formulario.diasConfirmar}</p> <!-- Novo campo -->
+                                <p><strong>Salario Pretendido:</strong> ${formulario.salarioPretendido}</p> <!-- Novo campo -->
+                            </div>
+                            <div class="button-group">
+                                <button onclick="imprimirFormulario(${formulario.id})">Baixar</button>
+                                <button onclick="excluirFormulario(${formulario.id})">Excluir</button>
+                            </div>
+                        `;
+                panel.addEventListener('click', () => selecionarFormulario(panel));
+                container.appendChild(panel);
+              });
+            })
+            .catch(error => {
+              console.error('Erro ao buscar formulários:', error);
+              alert('Erro ao buscar formulários!');
+            });
+  }
+
+  function ordenarPorNome() {
+    const container = document.getElementById('formulariosContainer');
+    const panels = container.querySelectorAll('.panel');
+    const sortedPanels = Array.from(panels).sort((a, b) => {
+      const nomeA = a.querySelector('p:first-of-type').innerText.split(': ')[1];
+      const nomeB = b.querySelector('p:first-of-type').innerText.split(': ')[1];
+      return nomeA.localeCompare(nomeB);
+    });
+    container.innerHTML = '';
+    sortedPanels.forEach(panel => {
+      container.appendChild(panel);
+    });
+  }
+
+  function buscarPorNome() {
+    const searchTerm = document.getElementById('searchInput').value.trim();
+    fetch(`/formulario/nome/${searchTerm}`)
+            .then(response => response.json())
+            .then(data => {
+              const container = document.getElementById('formulariosContainer');
+              container.innerHTML = '';
+              if (data.length > 0) {
+                data.forEach(formulario => {
+                  const panel = document.createElement('div');
+                  panel.classList.add('panel');
+                  panel.innerHTML = `
+                                <div>
+                                    <p><strong>Nome Completo:</strong> ${formulario.nomeCompleto}</p>
+                                    <p><strong>Endereço:</strong> ${formulario.endereco}</p>
+                                    <p><strong>Telefone:</strong> ${formulario.telefone}</p>
+                                    <p><strong>Descrição:</strong> ${formulario.descricao}</p>
+                                    <p><strong>Número Documento:</strong> ${formulario.numeroDocumento}</p>
+                                    <p><strong>Cursos:</strong> ${formulario.cursos}</p> <!-- Novo campo -->
+                                    <p><strong>Empresa:</strong> ${formulario.empresa}</p> <!-- Novo campo -->
+                                    <p><strong>Puesto:</strong> ${formulario.puesto}</p> <!-- Novo campo -->
+                                    <p><strong>Tiempo de Permanencia:</strong> ${formulario.tiempoPermanencia}</p> <!-- Novo campo -->
+                                    <p><strong>Referencia:</strong> ${formulario.referencia}</p> <!-- Novo campo -->
+                                    <p><strong>Disponibilidad:</strong> ${formulario.disponibilidad}</p> <!-- Novo campo -->
+                                    <p><strong>Días a Confirmar:</strong> ${formulario.diasConfirmar}</p> <!-- Novo campo -->
+                                    <p><strong>Salario Pretendido:</strong> ${formulario.salarioPretendido}</p> <!-- Novo campo -->
+                                </div>
+                                <div class="button-group">
+                                    <button onclick="imprimirFormulario(${formulario.id})">Baixar</button>
+                                    <button onclick="excluirFormulario(${formulario.id})">Excluir</button>
+                                </div>
+                            `;
+                  panel.addEventListener('click', () => selecionarFormulario(panel));
+                  container.appendChild(panel);
+                });
+              } else {
+                alert('Nenhum formulário encontrado para o nome digitado.');
+              }
+            })
+            .catch(error => {
+              console.error('Erro ao buscar formulário por nome:', error);
+              alert('Erro ao buscar formulário por nome!');
+            });
+  }
+
+  function buscarUltimoFormulario() {
+    fetch('/formulario/ultimo')
+            .then(response => response.json())
+            .then(data => {
+              const container = document.getElementById('formulariosContainer');
+              container.innerHTML = '';
+              const panel = document.createElement('div');
+              panel.classList.add('panel');
+              panel.innerHTML = `
+                        <div>
+                            <p><strong>Nome Completo:</strong> ${data.nomeCompleto}</p>
+                            <p><strong>Endereço:</strong> ${data.endereco}</p>
+                            <p><strong>Telefone:</strong> ${data.telefone}</p>
+                            <p><strong>Descrição:</strong> ${data.descricao}</p>
+                            <p><strong>Número Documento:</strong> ${data.numeroDocumento}</p>
+                            <p><strong>Cursos:</strong> ${data.cursos}</p> <!-- Novo campo -->
+                            <p><strong>Empresa:</strong> ${data.empresa}</p> <!-- Novo campo -->
+                            <p><strong>Puesto:</strong> ${data.puesto}</p> <!-- Novo campo -->
+                            <p><strong>Tiempo de Permanencia:</strong> ${data.tiempoPermanencia}</p> <!-- Novo campo -->
+                            <p><strong>Referencia:</strong> ${data.referencia}</p> <!-- Novo campo -->
+                            <p><strong>Disponibilidad:</strong> ${data.disponibilidad}</p> <!-- Novo campo -->
+                            <p><strong>Días a Confirmar:</strong> ${data.diasConfirmar}</p> <!-- Novo campo -->
+                            <p><strong>Salario Pretendido:</strong> ${data.salarioPretendido}</p> <!-- Novo campo -->
+                        </div>
+                        <div class="button-group">
+                            <button onclick="imprimirFormulario(${data.id})">Baixar</button>
+                            <button onclick="excluirFormulario(${data.id})">Excluir</button>
+                        </div>
+                    `;
+              panel.addEventListener('click', () => selecionarFormulario(panel));
+              container.appendChild(panel);
+            })
+            .catch(error => {
+              console.error('Erro ao buscar último formulário:', error);
+              alert('Erro ao buscar último formulário!');
+            });
+  }
+
+  function selecionarFormulario(panel) {
+    const panels = document.querySelectorAll('.panel');
+    panels.forEach(p => p.classList.remove('selected'));
+    panel.classList.add('selected');
+    document.getElementById('imprimirButton').disabled = false;
+  }
+
+  function imprimirFormulario(formularioId) {
+    fetch(`/formulario/${formularioId}/imprimir`, {
+      method: 'GET'
+    })
+            .then(response => response.blob())
+            .then(blob => {
+              fetch(`/formulario/${formularioId}`)
+                      .then(response => response.json())
+                      .then(data => {
+                        const nomeArquivo = `formulario_${data.nomeCompleto}.pdf`; // Nome do arquivo com base no nome completo do formulário
+                        if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+                          window.navigator.msSaveOrOpenBlob(blob, nomeArquivo);
+                        } else {
+                          const url = window.URL.createObjectURL(blob);
+                          const link = document.createElement('a');
+                          link.href = url;
+                          link.setAttribute('download', nomeArquivo); // Define o nome do arquivo
+                          document.body.appendChild(link);
+                          link.click();
+                          document.body.removeChild(link);
+                        }
+                      })
+                      .catch(error => {
+                        console.error('Erro ao obter o nome do formulário:', error);
+                        alert('Erro ao obter o nome do formulário!');
+                      });
+            })
+            .catch(error => {
+              console.error('Erro ao imprimir o formulário:', error);
+              alert('Erro ao imprimir o formulário!');
+            });
+  }
+
+  function excluirFormulario(formularioId) {
+    if (confirm("Tem certeza que deseja excluir este formulário?")) {
+      fetch(`/formulario/${formularioId}/excluir`, {
+        method: 'DELETE'
+      })
+              .then(response => {
+                if (response.ok) {
+                  alert("Formulário excluído com sucesso.");
+                  // Atualize a lista de formulários após a exclusão
+                  buscarFormularios();
+                } else {
+                  throw new Error('Erro ao excluir o formulário.');
+                }
+              })
+              .catch(error => {
+                console.error('Erro ao excluir o formulário:', error);
+                alert('Erro ao excluir o formulário!');
+              });
+    }
+  }
+</script>
+</body>
+</html>
